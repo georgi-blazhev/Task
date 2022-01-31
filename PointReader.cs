@@ -30,7 +30,7 @@ namespace LeadConsultTask
             {
                 var result = Regex.Matches(line, @"-?\d+");
 
-                if (result.Count > 3)
+                if (result.Count != 3)
                 {
                     throw new FormatException("Invalid format!");
                 }
