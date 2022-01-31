@@ -14,15 +14,25 @@ namespace Config
         {
             PointReader reader = new PointReader(@"C:\Users\User\source\repos\LeadConsultTask\Coordinates.txt");
 
-            List<Point> allPoints = reader.GetAllPoints();
+            try
+            {
+                List<Point> allPoints = reader.GetAllPoints();
+                CoordinateSystem system = new CoordinateSystem(allPoints);
 
-            CoordinateSystem system = new CoordinateSystem(allPoints);
+                var points = system.GetFarthestPointsForAllQuadrants();
 
-            var points = system.GetFarthestPointsForAllQuadrants();
+                var result = system.FindFarthestPoints(points);
 
-            var result = system.FindFarthestPoints(points);
-
-            PrintFarthestNumbers(result);
+                PrintFarthestNumbers(result);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }           
+            catch(ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         static void PrintFarthestNumbers(Dictionary<int,Point> result)

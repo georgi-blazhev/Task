@@ -95,6 +95,11 @@ namespace LeadConsultTask
                             throw new ArgumentException("Empty point");
                         }
 
+                        if (largestPointsInQuadrant.ContainsKey(quadrant.Number))
+                        {
+                            largestPointsInQuadrant.Remove(quadrant.Number);
+                        }
+
                         largestPointsInQuadrant.Add(quadrant.Number, result);
                     }                
                 }
